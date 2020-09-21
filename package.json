@@ -5,11 +5,15 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "dev": "webpack-dev-server --open --history-api-fallback --config webpack.config.js"
   },
   "dependencies": {
+    "ajax": "0.0.4",
     "core-js": "^3.6.5",
+    "jquery": "^3.5.1",
     "vue": "^2.6.11",
+    "vue-router": "^3.4.1",
     "vuex": "^3.4.0"
   },
   "devDependencies": {
@@ -36,11 +40,16 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {}
+    "rules": {
+      "no-unused-vars": "off"
+    }
   },
   "browserslist": [
     "> 1%",
     "last 2 versions",
     "not dead"
-  ]
+  ],
+  "rules": {
+    "no-unused-vars": "off"
+  }
 }
