@@ -1,16 +1,12 @@
 <template>
   <div class="register">
-    <p class="user" :class="{'need register':haveNotRegister}">
-      {{message}}<br/>
-      name:<input type="text" v-model="username"/><br/>
-      password:<input type="password" v-model="password"/><br/>
-      phone:<input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"><br/>
-      <button v-on:click="doRegister">Submit</button>
-    </p>
+    {{message}}<br/>
+    name:<input type="text" v-model="username"/><br/>
+    password:<input type="password" v-model="password"/><br/>
+    phone:<input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"><br/>
+    <button v-on:click="doRegister">Submit</button>
     <p v-if="haveNotRegister == false">You have already registered before</p>
-    <div v-if="main">
-      <h1>Main</h1>
-    </div>
+    <router-link :to="{path: url_login}">back to  login</router-link>
   </div>
 </template>
 
@@ -23,16 +19,19 @@ export default {
       password:'',
       phone:0,
       message:'',
-      haveNotRegister:true,
-      main:false
-    };
+      url_login:'/login/'+this.role,
+      };
   },
-  computed:{},
   methods:{
       doRegister: function(){
-
       }
-  }
+  },
+  props: {
+    role: {
+      type: String,
+      required: true,
+    },
+  },
 }
 </script>
 

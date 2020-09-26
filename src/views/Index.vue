@@ -1,8 +1,10 @@
 <template>
-	<div>
-		<p>{{msg}}</p>
-		<button @click="gotoLogin">Login</button>
-	</div>
+  <div>
+    <p>{{msg}}</p>
+    <button @click="gotoLogin('Customer')">Customer</button>
+    <button @click="gotoLogin('Restaurant')">Restaurant</button>
+    <button @click="gotoLogin('Deliveryman')">Deliveryman</button>
+  </div>
 </template>
 
 <script>
@@ -10,13 +12,15 @@ export default {
   name: 'Index',
   data: function(){
     return{
-      msg:'Main page'
+      msg:'Main page',
+      role:"",
     };
   },
   methods: {
-	  gotoLogin (){
-		  this.$router.push('/login');
-	  }
+    gotoLogin (identity){
+    this.role = identity;
+    this.$router.push('/login/'+this.role);
+    }
   }
 }
 </script>

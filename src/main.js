@@ -1,38 +1,11 @@
 import Vue from 'vue';
 import App from './app.vue';
+import Routers from './router.js';
 import VueRouter from 'vue-router';
 
 Vue.use(VueRouter);
 
 //Vue.config.productionTip = false
-
-const Routers = [
-  {
-    path:'/login',
-    meta:{
-      title:'login'
-    },
-    component: (resolve) => require(['./views/Login.vue'], resolve)
-  },
-  {
-    path:'/register',
-    meta:{
-      title:'register'
-    },
-    component: (resolve) => require(['./views/Register.vue'], resolve)
-  },
-  {
-    path:'/',
-    meta:{
-      title:'main page'
-    },
-    component: (resolve) => require(['./views/Index.vue'], resolve)
-  },
-  {
-    path: '*',
-    redirect: '/index'
-  }
-];
 
 const RouterConfig = {
   mode: 'history',

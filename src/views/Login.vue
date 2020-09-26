@@ -1,12 +1,10 @@
 <template>
   <div class="login">
-    <p v-if="isLogin">
-      {{message}}<br/>
-      name:<input type="text" v-model="username">
-      password:<input type="password" v-model="password">
-      <button v-on:click="verify">Login</button>
-	  <router-link to="/register">Not register yet?</router-link>
-    </p>
+    {{"Hello "+ role +" "+message}}<br/>
+    name:<input type="text" v-model="username">
+    password:<input type="password" v-model="password">
+    <button v-on:click="Login">Login</button>
+    <router-link :to="{path: url_register}">Not register yet?</router-link>
   </div>
 </template>
 
@@ -17,14 +15,22 @@ export default {
     return {
       username: "",
       password: "",
-      message: "Please login",
-      isLogin: true,
-      main: false
+      message: "please login",
+      have_account: true,
+      main: false,
+      url_register:"/register/"+this.role,
     };
   },
-  computed: {},
+  props: {
+    role: {
+      type: String,
+      required: true,
+    },
+  },
   methods: {
-    verify: function () {
+    Login (){
+      
+      this.$router.push('/');
     }
   }
 }
