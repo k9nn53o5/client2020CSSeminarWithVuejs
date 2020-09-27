@@ -2,10 +2,9 @@ import Vue from 'vue';
 import App from './app.vue';
 import Routers from './router.js';
 import VueRouter from 'vue-router';
+import store from './store';
 
 Vue.use(VueRouter);
-
-//Vue.config.productionTip = false
 
 const RouterConfig = {
   mode: 'history',
@@ -23,6 +22,7 @@ router.afterEach((to, from, next) => {
 new Vue({
   el: '#app',
   router: router,
+  store: store,
   render: h => {
     return h(App)
   }

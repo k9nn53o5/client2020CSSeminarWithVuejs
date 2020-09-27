@@ -29,8 +29,7 @@ export default {
   },
   methods: {
     Login (){
-      
-      this.$router.push('/');
+      this.$router.push('/customer/list');
     }
   }
 }
