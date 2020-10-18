@@ -18,7 +18,7 @@ export default {
 	},
 	methods:{
 		removeTheItem:function(){
-			//emit to Cart to change items
+			this.$emit('rmTheItem',this.itemInfo.id)
 		},
 	}
    

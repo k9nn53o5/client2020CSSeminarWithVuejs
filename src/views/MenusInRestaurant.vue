@@ -1,7 +1,7 @@
 <template>
 <div>
 	<food v-for="f in list" :Info="f" :key="f.id" v-on:putInCart="updateCart" ></food>
-	<cart :Items="foodsGoing2PutCart"></cart>
+	<cart :Items="foodsGoing2PutCart" v-on:RMItemFromCart="rmFromCart"></cart>
 </div>
 </template>
 <script>
@@ -27,6 +27,13 @@ export default {
 	methods: {
 		updateCart:function(foodGoing2Add){
 			this.foodsGoing2PutCart.push(foodGoing2Add);
+		},
+		rmFromCart:function(id){
+			for( var i = 0; i < this.foodsGoing2PutCart.length; i++){
+				if ( this.foodsGoing2PutCart[i].id === id){ 
+					this.foodsGoing2PutCart.splice(i, 1); 
+				}
+			}
 		}
 	},
 	mounted() {

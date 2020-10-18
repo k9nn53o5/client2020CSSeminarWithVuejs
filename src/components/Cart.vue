@@ -5,7 +5,7 @@
     what is in cart:<br/>
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     <div>
-        <CartItem v-for="item in cartItems" :Info="item" :key="item.id"></CartItem>
+        <CartItem v-for="item in cartItems" :Info="item" :key="item.id" v-on:rmTheItem="rmItemFromCart"></CartItem>
     </div>
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 </div>
@@ -19,6 +19,11 @@ export default {
         return{
             cartItems:this.Items //need id field
         };
+    },
+    methods:{
+        rmItemFromCart:function(id){
+            this.$emit('RMItemFromCart',id);
+        }
     },
     props:{
         Items:Array,
