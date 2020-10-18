@@ -19,6 +19,7 @@ export default {
       have_account: true,
       main: false,
       url_register:"/register/"+this.role,
+      url_loginToPage:"/"+this.role+"/list",
     };
   },
   props: {
@@ -29,7 +30,7 @@ export default {
   },
   methods: {
     Login (){
-      this.$router.push('/customer/list');
+      this.$router.push(this.url_loginToPage);
     }
   }
 }
