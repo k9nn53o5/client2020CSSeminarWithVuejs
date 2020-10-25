@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import restaurant from './modules/restaurant'
 import menu from './modules/menu'
 import order from './modules/order'
+import customer from './modules/customer'
 
 Vue.use(Vuex);
 
@@ -11,5 +12,6 @@ export default new Vuex.Store({
     restaurant,
     menu,
     order,
+    customer,
   }
 })

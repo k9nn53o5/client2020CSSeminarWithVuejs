@@ -9,6 +9,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: "Login",
   data: function () {
@@ -19,7 +21,6 @@ export default {
       have_account: true,
       main: false,
       url_register:"/register/"+this.role,
-      url_loginToPage:"/"+this.role+"/list",
     };
   },
   props: {
@@ -28,11 +29,40 @@ export default {
       required: true,
     },
   },
+  computed: {
+		listRestaurant() {
+			return this.$store.state.restaurant.restaurantsList;
+		},
+		listCustomer() {
+			return this.$store.state.customer.customersList;
+		}
+	},
   methods: {
-    Login (){
-      this.$router.push(this.url_loginToPage);
-    }
-  }
+    Login () {
+      //do vertify
+      let verifyUrl = '/'+this.role+'/verify'
+      axios.post(verifyUrl,
+      {name: String(this.username), password: String(this.password)}
+      ).then((response) => {
+        console.log(response)
+        if(response.data.result === 'Valid'){
+          let url_loginToPage = "/"+this.role+"/"+Number(response.data.cid)+"/list";
+          this.$router.push(url_loginToPage);
+        }
+        else{
+          this.message = String(response.data.result);
+        }
+      }).catch((error) => {
+        console.log(error);
+        this.message = String(error.response.data.result);
+      })
+    },
+  },
+  mounted() {
+      this.$store.dispatch('restaurant/getRestaurantsList')
+      this.$store.dispatch('customer/getCustomersList')
+	}
+
 }
 </script>
 

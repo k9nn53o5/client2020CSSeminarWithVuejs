@@ -39,14 +39,14 @@ const routers = [
 		props: true,
 	},
 	{
-		path: '/customer/list',
+		path: '/customers/:cid/list',
 		meta: {
 			title: 'list_restaurants'
 		},
 		component: ListRestaurants,
 	},
 	{
-		path: '/customer/list/:rid/menus',
+		path: '/customers/:cid/list/:rid/menus',
 		meta: {
 			title: 'list_restaurants_menus'
 		},
@@ -55,7 +55,7 @@ const routers = [
 	},
 
 	{
-		path: '/restaurant/list',
+		path: '/restaurants/list',
 		meta: {
 			title: 'list_restaurants_order_it_get'
 		},
@@ -63,7 +63,7 @@ const routers = [
 		props: true,
 	},
 	{
-		path: '/restaurant/list/:oid/food',
+		path: '/restaurants/list/:oid/food',
 		meta: {
 			title: 'list_restaurants_food_in_order'
 		},
@@ -71,7 +71,7 @@ const routers = [
 		props: true,
 	},
 	{
-		path: '/restaurant/updateInfo',
+		path: '/restaurants/updateInfo',
 		meta: {
 			title: 'update_restaurants_info'
 		},
@@ -79,7 +79,7 @@ const routers = [
 		props: true,
 	},
 	{
-		path: '/restaurant/updateMenu',
+		path: '/restaurants/updateMenu',
 		meta: {
 			title: 'update_restaurants_menu'
 		},
@@ -88,7 +88,7 @@ const routers = [
 	},
 
 	{
-		path: '/deliveryman/list',
+		path: '/deliverymans/list',
 		meta: {
 			title: 'list_orders_that_need_to_carry' 
 		},
@@ -96,7 +96,7 @@ const routers = [
 		props: true,
 	},
 	{
-		path: '/deliveryman/list/:oid/order',
+		path: '/deliverymans/list/:oid/order',
 		meta: {
 			title: 'the_order_detail' 
 		},

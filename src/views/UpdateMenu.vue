@@ -1,6 +1,6 @@
 <template>
   <div class="register">
-  <p v-if="action===''">{{message}}<br/></p>
+  <p v-if="action===''">{{message}}</p>
   <button v-on:click="action='new'">new</button>
   <button v-on:click="action='delete'">delete</button>
   <div v-if="action==='new'">
@@ -10,7 +10,7 @@
   <div v-if="action==='delete'">
     food name:<input type="text" v-model="foodName"/><br/>
   </div>
-    <button v-on:click="updateRestaurantMenu(action)">Submit</button>
+    <button v-on:click="updateRestaurantMenu(action)">Submit</button><br/>
     <router-link :to="{path: url_back}">back to restaurant page</router-link>
   </div>
 </template>

@@ -1,13 +1,15 @@
 <template>
   <div>
     <p>{{msg}}</p>
-    <button @click="gotoLogin('Customer')">Customer</button>
-    <button @click="gotoLogin('Restaurant')">Restaurant</button>
-    <button @click="gotoLogin('Deliveryman')">Deliveryman</button>
+    <button @click="gotoLogin('customers')">Customer</button>
+    <button @click="gotoLogin('restaurants')">Restaurant</button>
+    <button @click="gotoLogin('deliverymans')">Deliveryman</button>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'Index',
   data: function(){
@@ -21,7 +23,12 @@ export default {
     this.role = identity;
     this.$router.push('/login/'+this.role);
     }
-  }
+  },
+  created() {
+    axios.get('/test/abc').then((response) => {
+      console.log(response);
+    })
+  },
 }
 </script>
 

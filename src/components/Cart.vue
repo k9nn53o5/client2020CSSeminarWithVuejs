@@ -8,6 +8,7 @@
         <CartItem v-for="item in cartItems" :Info="item" :key="item.id" v-on:rmTheItem="rmItemFromCart"></CartItem>
     </div>
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    <button>submit</button>
 </div>
 </template>
 
