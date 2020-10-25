@@ -1,6 +1,6 @@
 <template>
 <div>
-    <oor></oor>
+    <oor :rid="Number(restaurantId)"></oor>
     <button v-on:click="goUpdateInfo">update info</button>
     <button v-on:click="goUpdateMenu">update menu</button>
 </div>
@@ -12,8 +12,9 @@ import oor from '../components/OrdersOfRestaurant'
 export default {
     data: function () {
         return {
-            url_updateInfo:'/restaurant/updateInfo',
-            url_updateMenu:'/restaurant/updateMenu',
+            url_updateInfo:'/restaurants/updateInfo',
+            url_updateMenu:'/restaurants/updateMenu',
+            restaurantId:this.$route.params.id,
         };
       },
     components:{oor},

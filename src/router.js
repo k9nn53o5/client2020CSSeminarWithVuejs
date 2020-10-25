@@ -12,10 +12,6 @@ import CAccount from './components/ClientAccount.vue'
 
 const routers = [
 	{
-		path: '*',
-		redirect: '/',
-	},
-	{
 		path: '/',
 		meta: {
 			title: 'main page'
@@ -39,14 +35,16 @@ const routers = [
 		props: true,
 	},
 	{
-		path: '/customers/:cid/list',
+		//id is customer ID
+		path: '/customers/:id/list',
 		meta: {
 			title: 'list_restaurants'
 		},
 		component: ListRestaurants,
+		props: true,
 	},
 	{
-		path: '/customers/:cid/list/:rid/menus',
+		path: '/customers/:id/list/:rid/menus',
 		meta: {
 			title: 'list_restaurants_menus'
 		},
@@ -55,7 +53,8 @@ const routers = [
 	},
 
 	{
-		path: '/restaurants/list',
+		//id is restaurant ID
+		path: '/restaurants/:id/list',
 		meta: {
 			title: 'list_restaurants_order_it_get'
 		},
@@ -63,7 +62,7 @@ const routers = [
 		props: true,
 	},
 	{
-		path: '/restaurants/list/:oid/food',
+		path: '/restaurants/:id/list/:oid/food',
 		meta: {
 			title: 'list_restaurants_food_in_order'
 		},
@@ -88,7 +87,8 @@ const routers = [
 	},
 
 	{
-		path: '/deliverymans/list',
+		//id is deliveryman ID
+		path: '/deliverymans/:id/list',
 		meta: {
 			title: 'list_orders_that_need_to_carry' 
 		},
@@ -96,7 +96,7 @@ const routers = [
 		props: true,
 	},
 	{
-		path: '/deliverymans/list/:oid/order',
+		path: '/deliverymans/:id/list/:oid/order',
 		meta: {
 			title: 'the_order_detail' 
 		},

@@ -1,12 +1,14 @@
 <template>
 <div>
-	<food v-for="f in list" :Info="f" :key="f.id" v-on:putInCart="updateCart" ></food>
-	<cart :Items="foodsGoing2PutCart" v-on:RMItemFromCart="rmFromCart"></cart>
+	<food v-for="f in menusList" :Info="f" :key="f.id" v-on:putInCart="updateFG2PC" ></food>
+	<cart :Items="foodsGoing2PutCart" v-on:RMItemFromCart="rmFromFG2PC"></cart>
 </div>
 </template>
 <script>
 import cart from '../components/Cart'
 import food from '../components/FoodInMenu'
+import axios from 'axios'
+
 export default {
 	components: {
 		food,
@@ -16,28 +18,30 @@ export default {
 	data:function(){
 		return{
 			//搞懂這筆data會存哪，存多久
+			//foodsGoing2PutCart -> FG2PC
+			menusList:[],
 			foodsGoing2PutCart:[],
 		};
 	},
-	computed: {
-		list() {
-			return this.$store.state.menu.menusList
-		}
-	},
+	
 	methods: {
-		updateCart:function(foodGoing2Add){
+		updateFG2PC:function(foodGoing2Add){
 			this.foodsGoing2PutCart.push(foodGoing2Add);
 		},
-		rmFromCart:function(id){
+		rmFromFG2PC:function(id){
 			for( var i = 0; i < this.foodsGoing2PutCart.length; i++){
 				if ( this.foodsGoing2PutCart[i].id === id){ 
 					this.foodsGoing2PutCart.splice(i, 1); 
 				}
 			}
-		}
+		},
 	},
-	mounted() {
-		this.$store.dispatch('menu/getMenusList')
+	created() {
+		let endpoint = '/restaurants/'+ String(this.$route.params.rid) + '/menus';
+		axios.get(endpoint).then((response) => {
+			console.log(response);
+			this.menusList = response.data;
+		});
 	}
 }
 </script>

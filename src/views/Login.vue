@@ -46,7 +46,7 @@ export default {
       ).then((response) => {
         console.log(response)
         if(response.data.result === 'Valid'){
-          let url_loginToPage = "/"+this.role+"/"+Number(response.data.cid)+"/list";
+          let url_loginToPage = "/"+this.role+"/"+Number(response.data.id)+"/list";
           this.$router.push(url_loginToPage);
         }
         else{

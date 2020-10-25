@@ -1,16 +1,16 @@
 <template>
 <div>
-	<div>
-		<order v-for="o in list" :orderInfo="o" :role="role" :key="o.og_id"></order>
-	</div>
+	<order v-for="o in list" :orderInfo="o" :role="role" :key="o.og_id" :did="deliverymanId"></order>
 </div>
 </template>
+
 <script>
 import order from '../components/order'
 export default {
 	data:function(){
         return{
-			role: 'deliveryman'
+			role: 'deliveryman',
+			deliverymanId: this.$route.params.id,
 		};
     },
 	components: { order },
@@ -25,6 +25,6 @@ export default {
 	}
 }
 </script>
-<style>
 
+<style>
 </style>

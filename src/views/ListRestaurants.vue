@@ -1,32 +1,29 @@
 <template>
 <div>
 	<clientaccount :cid="Number(customerId)"></clientaccount>
-	<restaurant v-for="r in listRestaurants" :restaurantInfo="r" :cid="Number(customerId)" :key="r.id"></restaurant>
+	<router-link v-for="r in listRestaurants" :key="r.id" 
+		:to="{path: '/customers/'+String(customerId)+'/list/'+r.id+'/menus'}">
+		{{r.name}}<br/>
+	</router-link>
 </div>
 </template>
 <script>
-import restaurant from '../components/restaurant'
+//import restaurant from '../components/restaurant'
 import clientaccount from '../components/ClientAccount'
 import axios from 'axios'
 
 export default {
 	data: function(){
 		return{
-			customerId: this.$route.params.cid,
-			//listRestaurants: this.$store.state.restaurant.restaurantsList,
+			customerId: this.$route.params.id,
 			listRestaurants:[],
-
 		};
 	},
+	
 	components: {
-		restaurant,
 		clientaccount,
 	},
 	name: "ListRestaurants",
-	mounted() {
-		this.$store.dispatch('restaurant/getRestaurantsList')
-		this.$store.dispatch('customer/getCustomersList')
-	},
 	created() {
 		let restaurantsUrl = '/restaurants'
 		axios.get(restaurantsUrl).then((response) => {

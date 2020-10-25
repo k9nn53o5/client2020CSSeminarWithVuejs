@@ -9,13 +9,15 @@ export default {
     data:function(){
         return{
 			order:this.orderInfo,
-            url_order_r:'/restaurant/list/'+this.orderInfo.id+'/food',
-            url_order_d:'/deliveryman/list/'+this.orderInfo.id+'/order',
+            url_order_r:'/restaurants/'+this.rid+'/list/'+this.orderInfo.id+'/food',
+            url_order_d:'/deliverymans/'+this.did+'/list/'+this.orderInfo.id+'/order',
         };
     },
     props:{
         orderInfo: Object,
         role: String,
+        rid:Number,
+        did:Number,
     }
 }
 </script>

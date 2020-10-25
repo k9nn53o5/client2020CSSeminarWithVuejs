@@ -1,6 +1,6 @@
 <template>
 <div>
-	<order v-for="o in list" :orderInfo="o" :role="role" :key="o.og_id"></order>
+	<order v-for="o in list" :orderInfo="o" :role="role" :key="o.og_id" :rid="rid"></order>
 </div>
 </template>
 
@@ -12,6 +12,9 @@ export default {
 			role:'restaurant',
 			oidsArr:[],
 		}
+	},
+	props:{
+		rid:Number,
 	},
 	components: { order },
 	name: "ListRestaurants",
