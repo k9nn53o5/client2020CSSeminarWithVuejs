@@ -1,15 +1,14 @@
 <template>
   <div class="register">
-    {{message}}<br/>
-    name:<input type="text" v-model="name"/><br/>
-    password:<input type="password" v-model="password"/><br/>
-    phone:<input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"><br/>
-    <button v-on:click="doRegister">Submit</button>
-    <router-link :to="{path: url_login}">back to  login</router-link>
+    <registerCR :role="role" v-if="role==='customers'||role==='restaurants'"></registerCR>
+    <registerD :role="role" v-if="role==='deliverymans'"></registerD>
   </div>
 </template>
 
 <script>
+import registerCR from '../components/RegisterForC_R'
+import registerD from '../components/RegisterForD'
+
 export default {
   name: 'Register',
   data: function(){
@@ -21,15 +20,15 @@ export default {
       url_login:'/login/'+this.role,
       };
   },
-  methods:{
-      doRegister: function(){
-      }
-  },
   props: {
     role: {
       type: String,
       required: true,
     },
+  },
+  components: {
+    registerCR,
+    registerD,
   },
 }
 </script>

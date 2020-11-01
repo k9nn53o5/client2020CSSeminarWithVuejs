@@ -1,7 +1,9 @@
 <template>
 <div>
+	{{restaurantInfo.name}} || {{restaurantInfo.address}} || {{restaurantInfo.phoneNum}}<br/>
 	<food v-for="f in menusList" :Info="f" :key="f.id" v-on:putInCart="updateFG2PC" ></food>
 	<cart :Items="foodsGoing2PutCart" v-on:RMItemFromCart="rmFromFG2PC"></cart>
+	<button v-on:click="submitFG2PC">submit</button>
 </div>
 </template>
 <script>
@@ -18,9 +20,9 @@ export default {
 	data:function(){
 		return{
 			//搞懂這筆data會存哪，存多久
-			//foodsGoing2PutCart -> FG2PC
 			menusList:[],
 			foodsGoing2PutCart:[],
+			restaurantInfo:Object,
 		};
 	},
 	
@@ -35,13 +37,28 @@ export default {
 				}
 			}
 		},
+		submitFG2PC:function(){
+			this.$store.dispatch('cart/updateCartData',this.foodsGoing2PutCart);
+			this.foodsGoing2PutCart.splice(0,this.foodsGoing2PutCart.length);
+			let url = '/customers/'+String(this.$route.params.id)+'/list';
+			this.$router.push(url)
+		}
 	},
 	created() {
+
+		let endpointRInfo = '/restaurants/'+ String(this.$route.params.rid);
+		axios.get(endpointRInfo).then((response) => {
+			console.log("-------"+"\n"+response);
+			this.restaurantInfo = response.data;
+		}).catch((error)=>{
+			console.log(error.response)
+		});
+
 		let endpoint = '/restaurants/'+ String(this.$route.params.rid) + '/menus';
 		axios.get(endpoint).then((response) => {
 			console.log(response);
 			this.menusList = response.data;
-		});
+		})
 	}
 }
 </script>

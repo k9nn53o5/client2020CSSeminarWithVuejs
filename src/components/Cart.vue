@@ -8,7 +8,7 @@
         <CartItem v-for="item in cartItems" :Info="item" :key="item.id" v-on:rmTheItem="rmItemFromCart"></CartItem>
     </div>
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    <button>submit</button>
+    <button v-if="isMyCart===true" v-on:click="sendOrder2Restaurant">send to restaurant</button>
 </div>
 </template>
 
@@ -18,18 +18,30 @@ export default {
     name: "Cart",
     data:function(){
         return{
-            cartItems:this.Items //need id field
+            cartItems:this.Items, //need id field
+            isMyCart:false,
         };
     },
     methods:{
         rmItemFromCart:function(id){
             this.$emit('RMItemFromCart',id);
-        }
+        },
+        sendOrder2Restaurant:function(){
+            //send to restaur
+            this.$store.dispatch('cart/emptyCartData',true)
+        },
     },
     props:{
         Items:Array,
+        ismycart:Boolean,
     },
     components: {CartItem},
+    created () {
+        if(this.ismycart === true){
+            this.isMyCart = this.ismycart;
+        }
+    },
+
 }
 </script>
 

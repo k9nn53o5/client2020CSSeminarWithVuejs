@@ -4,8 +4,9 @@
             hi {{customerName}} || we will send to: {{customerAddress}} || 
             <button v-on:click="goOrderInfo">your order</button> || 
             <button v-on:click="goSetting">setting</button> || 
-            <button v-on:click="openCart">your cart</button> <br/>
-            <cart v-if="opencart === true"></cart>
+            <button v-on:click="openCart">your cart</button><br/>
+            <setting v-if="opensetting===true" :customerInfo="customerInfo" :cid="cid"></setting>
+            <cart v-if="opencart===true" :ismycart="true" :Items="Items"></cart>
         </p>
     </div>
 </template>
@@ -13,6 +14,7 @@
 <script>
 import axios from 'axios'
 import cart from '../components/Cart'
+import setting from '../components/ClientSetting'
 
 export default {
     data:function(){
@@ -22,7 +24,9 @@ export default {
             customerAddress:'xxx city,xxx region,xxx road,xx section,number xx ',
             url_ordersOfCustomer:'/',
             url_setting:'/',
+            opensetting:false,
             opencart:false,
+            Items:[],
         };
     },
     props:{
@@ -37,11 +41,20 @@ export default {
             this.$router.push(this.url_ordersOfCustomer);
         },
         goSetting:function(){
-            this.$router.push(this.url_setting);
+            if(this.opensetting === false){this.opensetting = true;}
+            else{this.opensetting = false;}
         },
         openCart:function(){
-           if(this.opencart === false){this.opencart = true;}
-           else{this.opencart = false;}
+           if(this.opencart === false){
+               this.opencart = true;
+                this.Items =  this.$store.state.cart.cartList;
+            }
+           else{
+               this.opencart = false;
+            }
+        },
+        list:function(){
+            return this.$store.state.cart.cartList;
         }
     },
     created() {
@@ -51,8 +64,12 @@ export default {
             this.customerInfo = response.data;
             this.getCInfo();
         });
+
     },
-    components: { cart },
+    components: { 
+        cart,
+        setting,
+    },
 }
 </script>
 
