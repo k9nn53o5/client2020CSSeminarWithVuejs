@@ -6,7 +6,7 @@
             <button v-on:click="goSetting">setting</button> || 
             <button v-on:click="openCart">your cart</button><br/>
             <setting v-if="opensetting===true" :customerInfo="customerInfo" :cid="cid"></setting>
-            <cart v-if="opencart===true" :ismycart="true" :Items="Items"></cart>
+            <cart v-if="opencart===true" :ismycart="true" :Items="Items" v-on:RENEWCart="REnewCart" :cid="cid"></cart>
         </p>
     </div>
 </template>
@@ -27,6 +27,7 @@ export default {
             opensetting:false,
             opencart:false,
             Items:[],
+            number:0,
         };
     },
     props:{
@@ -45,19 +46,25 @@ export default {
             else{this.opensetting = false;}
         },
         openCart:function(){
-           if(this.opencart === false){
-               this.opencart = true;
+            if(this.opencart === false){
+                this.opencart = true;
                 this.Items =  this.$store.state.cart.cartList;
             }
-           else{
+            else{
                this.opencart = false;
             }
+        },
+        REnewCart:function(bool){
+            this.Items = this.$store.state.cart.cartList;
+            this.$forceUpdate();
         },
         list:function(){
             return this.$store.state.cart.cartList;
         }
     },
     created() {
+        //console.log(this.$store.state.cart.cartList);
+
         let url = '/customers/'+ String(this.cid);
         axios.get(url).then((response) => {
             console.log(response);

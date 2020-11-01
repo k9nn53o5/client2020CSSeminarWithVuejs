@@ -39,7 +39,7 @@ export default {
 		},
 		submitFG2PC:function(){
 			this.$store.dispatch('cart/updateCartData',this.foodsGoing2PutCart);
-			this.foodsGoing2PutCart.splice(0,this.foodsGoing2PutCart.length);
+			console.log(this.$store.state.cart.cartList);
 			let url = '/customers/'+String(this.$route.params.id)+'/list';
 			this.$router.push(url)
 		}
@@ -48,7 +48,6 @@ export default {
 
 		let endpointRInfo = '/restaurants/'+ String(this.$route.params.rid);
 		axios.get(endpointRInfo).then((response) => {
-			console.log("-------"+"\n"+response);
 			this.restaurantInfo = response.data;
 		}).catch((error)=>{
 			console.log(error.response)
