@@ -39,17 +39,19 @@ export default {
             //send to restaurant
             let myjson = this.createOrderJson();
             console.log(myjson);
-            // let myurl = '/customers/'+String(this.cid)+'/orders';
-            // axios.post(myurl, myjson).then((response)=>{
-            //     this.msg = 'success'
-            // }).catch((error)=>{
-            //     this.msg = error.response.status;
-            // })
+            let myurl = '/customers/'+String(this.cid)+'/orders';
+            axios.post(myurl, myjson).then((response)=>{
+                this.msg = 'success'
+            }).catch((error)=>{
+                this.msg = error.response.status;
+            });
 
             // //empty the cart in store and renew component
-            // this.$store.dispatch('cart/emptyCartData',true);
-            // this.$emit('RENEWCart',true);
-            // this.cartItems = this.Items;
+            this.$store.dispatch('cart/emptyCartData',true);
+            this.cartItems = this.Items;  
+            this.$emit('RENEWCart',true);
+
+           
         },
         createOrderJson:function(){
             let ogs = [];
@@ -58,9 +60,8 @@ export default {
             for (let i=0;i<tmpcart.length;i++){
                 let target = tmpcart[i];
                 let targetId = tmpcart[i].id;
-
                 //if have bug
-                if(ogQueue.find(e => e.id === targetId) === undefined){
+                if(ogQueue.find(e => e.og_dishId === targetId) === undefined){
                     let targetNo = tmpcart.filter(item => item.id === targetId).length;
                     let tmpOg = {
                         og_dishId : targetId,
@@ -83,10 +84,10 @@ export default {
                 rId:tmpcart[0].storeId,
                 ogs:ogQueue,
             };
-
             return outputJson;
         },
     },
+
     components: {CartItem},
     created () {
         if(this.ismycart === true){

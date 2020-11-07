@@ -22,8 +22,7 @@ export default {
             customerInfo: Object,
             customerName:'xxx',
             customerAddress:'xxx city,xxx region,xxx road,xx section,number xx ',
-            url_ordersOfCustomer:'/',
-            url_setting:'/',
+            url_ordersOfCustomer:'/customers/'+this.cid+'/orders',
             opensetting:false,
             opencart:false,
             Items:[],
@@ -56,15 +55,13 @@ export default {
         },
         REnewCart:function(bool){
             this.Items = this.$store.state.cart.cartList;
-            this.$forceUpdate();
+             this.$emit('RENEWCART',true);
         },
         list:function(){
             return this.$store.state.cart.cartList;
         }
     },
     created() {
-        //console.log(this.$store.state.cart.cartList);
-
         let url = '/customers/'+ String(this.cid);
         axios.get(url).then((response) => {
             console.log(response);

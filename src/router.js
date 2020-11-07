@@ -9,6 +9,9 @@ import OrdersOfDeliveryman from './views/OrdersOfDeliveryman.vue'
 import UpdateInfo from './views/UpdateInfo.vue'
 import UpdateMenu from './views/UpdateMenu.vue'
 import CAccount from './components/ClientAccount.vue'
+import ordersubmitsuccess from './views/orderSubmitSuccess.vue'
+import ordersOfCustomer from './views/OrdersOfCustomer.vue'
+import orderChangeResult from './views/orderChangeStatusResult.vue'
 
 const routers = [
 	{
@@ -49,6 +52,22 @@ const routers = [
 			title: 'list_restaurants_menus'
 		},
 		component: MenusInRestaurant,
+		props: true,
+	},
+	{
+		path: '/customers/:id/orderSumbitSuccess',
+		meta: {
+			title: 'order_Submit_Success'
+		},
+		component: ordersubmitsuccess,
+		props: true,
+	},
+	{
+		path: '/customers/:id/orders',
+		meta: {
+			title: 'order_of_customer'
+		},
+		component: ordersOfCustomer,
 		props: true,
 	},
 
@@ -101,6 +120,15 @@ const routers = [
 			title: 'the_order_detail' 
 		},
 		component: OrderDetail,
+		props: true,
+	},
+
+	{
+		path: '/orderChangeResult/:role/:tmpid/:statusCode',
+		meta: {
+			title: 'the_order_status_change' 
+		},
+		component: orderChangeResult,
 		props: true,
 	},
 

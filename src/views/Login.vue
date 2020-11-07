@@ -29,14 +29,6 @@ export default {
       required: true,
     },
   },
-  computed: {
-		listRestaurant() {
-			return this.$store.state.restaurant.restaurantsList;
-		},
-		listCustomer() {
-			return this.$store.state.customer.customersList;
-		}
-	},
   methods: {
     Login () {
       //do vertify

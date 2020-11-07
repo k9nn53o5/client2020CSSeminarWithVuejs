@@ -1,6 +1,6 @@
 <template>
 <div>
-	<order v-for="o in orders" :orderInfo="o" :role="role" :key="o.og_id" :did="deliverymanId"></order>
+	<order v-for="o in orders" :orderInfo="o" :role="role" :key="o.id" :cid="cId"></order>
 </div>
 </template>
 
@@ -10,15 +10,15 @@ import axios from 'axios'
 export default {
 	data:function(){
         return{
-			role: 'deliveryman',
-			deliverymanId: Number(this.$route.params.id),
+			role: 'customer',
+			cId: Number(this.$route.params.id),
 			orders:[],
 		};
     },
 	components: { order },
-	name: "ListOrdersNeedToDeliver",
+	name: "ListOrdersBelong2Customer",
 	created() {
-		let endpoint = '/orders/ordersNeedToBeSend';
+		let endpoint = '/customers/'+this.$route.params.id+'/orders';
 		axios.get(endpoint).then((response)=>{
 			console.log(response.data);
 			this.orders = response.data;

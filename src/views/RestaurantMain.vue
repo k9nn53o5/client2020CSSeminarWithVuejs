@@ -25,7 +25,8 @@ export default {
         goUpdateMenu(){
             this.$router.push(this.url_updateMenu);
         }
-    }
+    },
+    
 }
 </script>
 
