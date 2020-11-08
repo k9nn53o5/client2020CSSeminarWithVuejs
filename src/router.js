@@ -89,7 +89,7 @@ const routers = [
 		props: true,
 	},
 	{
-		path: '/restaurants/updateInfo',
+		path: '/restaurants/:id/updateInfo',
 		meta: {
 			title: 'update_restaurants_info'
 		},
@@ -97,7 +97,7 @@ const routers = [
 		props: true,
 	},
 	{
-		path: '/restaurants/updateMenu',
+		path: '/restaurants/:id/updateMenu',
 		meta: {
 			title: 'update_restaurants_menu'
 		},

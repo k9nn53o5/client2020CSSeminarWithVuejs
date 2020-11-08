@@ -1,7 +1,7 @@
 <template>
-<div>
-	<order v-for="o in orders" :orderInfo="o" :role="role" :key="o.id" :rid="rid"></order>
-</div>
+	<div>
+		<order v-for="o in orders" :orderInfo="o" :role="role" :key="o.id" :rid="rid"></order>
+	</div>
 </template>
 
 <script>
@@ -21,15 +21,13 @@ export default {
 	components: { order },
 	name: "ListRestaurants",
 	created() {
-		//this.orders = this.$store.state.order.ordersList;
-
-        let endpoint = '/restaurants/'+(this.rid)+'/orders';
+        let endpoint = '/api/restaurants/'+(this.rid)+'/orders';
         axios.get(endpoint).then((response) => {
 			this.orders = response.data;
 		}).catch((error)=>{
 			console.log(error.response)
-		});
-    },
+		});	
+	},
 }
 </script>
 

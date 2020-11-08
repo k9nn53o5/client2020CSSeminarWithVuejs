@@ -46,14 +46,14 @@ export default {
 	},
 	created() {
 
-		let endpointRInfo = '/restaurants/'+ String(this.$route.params.rid);
+		let endpointRInfo = '/api/restaurants/'+ String(this.$route.params.rid);
 		axios.get(endpointRInfo).then((response) => {
 			this.restaurantInfo = response.data;
 		}).catch((error)=>{
 			console.log(error.response)
 		});
 
-		let endpoint = '/restaurants/'+ String(this.$route.params.rid) + '/menus';
+		let endpoint = '/api/restaurants/'+ String(this.$route.params.rid) + '/menus';
 		axios.get(endpoint).then((response) => {
 			console.log(response);
 			this.menusList = response.data;

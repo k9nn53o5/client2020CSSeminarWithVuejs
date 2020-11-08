@@ -18,11 +18,12 @@ export default {
       password:'',
       phoneNo:0,
       message:'',
-      url_back:'/restaurant/list',
+      url_back:'/restaurants/'+Number(this.$route.params.id)+'/list',
       };
   },
   methods:{
       updateRestaurantInfo: function(){
+        
       }
   },
 

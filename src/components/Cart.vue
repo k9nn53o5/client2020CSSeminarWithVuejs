@@ -4,8 +4,9 @@
     <br/>
     what is in cart:<br/>
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    <p v-if="msg!=''">{{msg}}</p>
     <div>
-        <CartItem v-for="item in cartItems" :Info="item" :key="item.id" v-on:rmTheItem="rmItemFromCart"></CartItem>
+        <CartItem v-for="item in cartItems" :Info="item" :key="item.id" v-on:rmTheItem="rmItemFromCart" :isMyCart="isMyCart"></CartItem>
     </div>
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     <button v-if="isMyCart===true" v-on:click="sendOrder2Restaurant">send to restaurant</button>
@@ -37,9 +38,14 @@ export default {
         },
         sendOrder2Restaurant:function(){
             //send to restaurant
+            if(this.cartItems.length === 0){
+                this.msg = 'cart is empty,how about order some food';
+                return
+            }
+            
             let myjson = this.createOrderJson();
             console.log(myjson);
-            let myurl = '/customers/'+String(this.cid)+'/orders';
+            let myurl = '/api/customers/'+String(this.cid)+'/orders';
             axios.post(myurl, myjson).then((response)=>{
                 this.msg = 'success'
             }).catch((error)=>{
@@ -50,8 +56,6 @@ export default {
             this.$store.dispatch('cart/emptyCartData',true);
             this.cartItems = this.Items;  
             this.$emit('RENEWCart',true);
-
-           
         },
         createOrderJson:function(){
             let ogs = [];

@@ -1,5 +1,6 @@
 <template>
 <div>
+	<h3 v-if="orders.length === 0">There are no order right now. Please Wait a minute. </h3>
 	<order v-for="o in orders" :orderInfo="o" :role="role" :key="o.og_id" :did="deliverymanId"></order>
 </div>
 </template>
@@ -18,7 +19,7 @@ export default {
 	components: { order },
 	name: "ListOrdersNeedToDeliver",
 	created() {
-		let endpoint = '/orders/ordersNeedToBeSend';
+		let endpoint = '/api/orders/ordersNeedToBeSend';
 		axios.get(endpoint).then((response)=>{
 			console.log(response.data);
 			this.orders = response.data;

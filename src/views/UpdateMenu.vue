@@ -25,14 +25,11 @@ export default {
       password:'',
       phoneNo:0,
       message:'Manage Menu',
-      url_back:'/restaurant/list',
+      url_back:'/restaurants/'+Number(this.$route.params.id)+'/list',
       action:''
     };
   },
   methods:{
-    // pickAction: function(a){
-    //   this.action = a
-    // },
     newFood: function(){
     },
     deleteFood: function(){

@@ -25,7 +25,7 @@ export default {
     }
   },
   created() {
-    axios.get('/test/abc').then((response) => {
+    axios.get('/api/test/abc').then((response) => {
       console.log(response);
     })
   },

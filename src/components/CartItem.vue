@@ -1,6 +1,6 @@
 <template>
 <div>
-    {{itemInfo.name}}<button v-on:click="removeTheItem">remove</button>
+    {{itemInfo.name}}<button v-if="isMyCart===false" v-on:click="removeTheItem">remove</button>
 </div>
 </template>
 
@@ -14,6 +14,7 @@ export default {
         };
     },
     props:{
+        isMyCart:Boolean,
         Info:Object,
 	},
 	methods:{

@@ -33,7 +33,7 @@ export default {
   },
   methods:{
       doRegister: function(){
-        let registerUrl = '/'+this.role;
+        let registerUrl = '/api/'+this.role;
         axios.post(registerUrl,
         {name:this.name,password:this.password,phone:this.phone,address:this.address}
         ).then((response)=>{

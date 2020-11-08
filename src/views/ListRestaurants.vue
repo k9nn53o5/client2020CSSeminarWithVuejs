@@ -33,7 +33,7 @@ export default {
 
 	name: "ListRestaurants",
 	created() {
-		let restaurantsUrl = '/restaurants'
+		let restaurantsUrl = '/api/restaurants'
 		axios.get(restaurantsUrl).then((response) => {
 			this.listRestaurants = response.data
 		});

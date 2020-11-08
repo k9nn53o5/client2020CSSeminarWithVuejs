@@ -32,7 +32,7 @@ export default {
   methods: {
     Login () {
       //do vertify
-      let verifyUrl = '/'+this.role+'/verify'
+      let verifyUrl = '/api/'+this.role+'/verify'
       axios.post(verifyUrl,
       {name: String(this.username), password: String(this.password)}
       ).then((response) => {

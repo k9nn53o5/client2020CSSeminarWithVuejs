@@ -22,7 +22,7 @@ export default {
     },
     methods:{
         deleteAccount:function(){
-            let deleteUrl = '/customers/'+Number(this.cid);
+            let deleteUrl = '/api/customers/'+Number(this.cid);
             axios.delete(deleteUrl).then((response)=>{
                 console.log(response);
                 if(response.status === 200){

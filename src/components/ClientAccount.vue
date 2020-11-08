@@ -62,7 +62,7 @@ export default {
         }
     },
     created() {
-        let url = '/customers/'+ String(this.cid);
+        let url = '/api/customers/'+ String(this.cid);
         axios.get(url).then((response) => {
             console.log(response);
             this.customerInfo = response.data;
