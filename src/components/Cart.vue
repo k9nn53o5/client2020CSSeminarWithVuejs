@@ -64,7 +64,6 @@ export default {
             for (let i=0;i<tmpcart.length;i++){
                 let target = tmpcart[i];
                 let targetId = tmpcart[i].id;
-                //if have bug
                 if(ogQueue.find(e => e.og_dishId === targetId) === undefined){
                     let targetNo = tmpcart.filter(item => item.id === targetId).length;
                     let tmpOg = {
@@ -78,11 +77,13 @@ export default {
             }
 
             let total=0;
+            let orderNUM=0;
             for(let i=0;i<ogQueue.length;i++){
+                orderNUM += ogQueue[i].og_number;
                 total += (ogQueue[i].og_price*ogQueue[i].og_number);
             }
             let outputJson = {
-                order_num:ogQueue.length,
+                order_num:orderNUM,
                 cId:this.cid,
                 pay_price:total,
                 rId:tmpcart[0].storeId,

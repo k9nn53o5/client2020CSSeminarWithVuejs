@@ -3,7 +3,7 @@
     <oor :rid="Number(restaurantId)"></oor>
     <br/>
     <h3>Setting:</h3>
-    <button v-on:click="goUpdateInfo">update info</button>
+    <button v-on:click="goUpdateInfo">delete account</button>
     <button v-on:click="goUpdateMenu">update menu</button>
 </div>
 </template>

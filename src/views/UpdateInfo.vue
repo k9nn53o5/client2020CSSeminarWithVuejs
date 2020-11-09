@@ -1,29 +1,31 @@
 <template>
-  <div class="register">
-    {{message}}<br/>
-    restaurant name:<input type="text" v-model="rname"/><br/>
-    password:<input type="password" v-model="password"/><br/>
-    phone number:<input type="text" v-model="phoneNo"><br/>
-    <button v-on:click="updateRestaurantInfo">Submit</button>
-    <router-link :to="{path: url_back}">back to restaurant page</router-link>
+  <div class="delete">
+    <router-link :to="{path: url_back}">back</router-link><br/><br/><br/>
+####################################################<br/><br/><br/>
+    <button v-on:click="deleteRestaurant">Delete</button>
   </div>
 </template>
 
 <script>
+import axios from "axios"
+
 export default {
   name: 'Register',
   data: function(){
     return{
-      rname:'',
-      password:'',
-      phoneNo:0,
-      message:'',
+      url_back_root:'/',
       url_back:'/restaurants/'+Number(this.$route.params.id)+'/list',
       };
   },
   methods:{
-      updateRestaurantInfo: function(){
-        
+      deleteRestaurant: function(){
+          let endpoint = '/api/restaurants/'+Number(this.$route.params.id);
+          axios.delete(endpoint).then((response)=>{
+            console.log(response.data);
+          }).catch((error)=>{
+            console.log(error.response.data);
+          });
+          this.$router.push(this.url_back_root);
       }
   },
 

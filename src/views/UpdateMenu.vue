@@ -10,12 +10,13 @@
   <div v-if="action==='delete'">
     food name:<input type="text" v-model="foodName"/><br/>
   </div>
-    <button v-on:click="updateRestaurantMenu(action)">Submit</button><br/>
-    <router-link :to="{path: url_back}">back to restaurant page</router-link>
+    <button v-on:click="updateRestaurantMenu()">Submit</button><br/>
   </div>
 </template>
 
 <script>
+import axios from "axios"
+
 export default {
   name: 'UpdateMenu',
   data: function(){
@@ -31,16 +32,40 @@ export default {
   },
   methods:{
     newFood: function(){
+      let endpoint = '/api/restaurants/'+Number(this.$route.params.id)+'/menus';
+      let myjson = {
+        name: String(this.foodName),
+        storeId:Number(this.$route.params.id),
+        price:Number(this.price),
+      }
+      axios.post(endpoint,myjson).then((response)=>{
+        console.log(response.data);
+        this.message = "add into menu success";
+      }).catch((error)=>{
+        console.log(error.response.data);
+        this.message = "add into menu fail";
+      });
     },
+
     deleteFood: function(){
+      let endpoint = '/api/restaurants/'+Number(this.$route.params.id)+'/menus/foodName/'+String(this.foodName);
+      axios.delete(endpoint).then((response)=>{
+        console.log(response.data);
+        this.message = "delete from menu success";
+      }).catch((error)=>{
+        console.log(error.response.data);
+        this.message = "delete from menu fail";
+      });
     },
-    updateRestaurantMenu: function(a){
-      if(a==='new'){
-        //do new
+
+    updateRestaurantMenu: function(){
+      if(this.action==='new'){
+        this.newFood();
       }
-      else if(a==='delete'){
-        //do delete
+      else if(this.action==='delete'){
+        this.deleteFood();
       }
+      this.$router.push(this.url_back);
     }
   },
 

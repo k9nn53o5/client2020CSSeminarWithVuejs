@@ -1,5 +1,6 @@
 <template>
 	<div>
+		<p v-if="orders.length === 0"> there is no order yet</p>
 		<order v-for="o in orders" :orderInfo="o" :role="role" :key="o.id" :rid="rid"></order>
 	</div>
 </template>
