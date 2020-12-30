@@ -7,6 +7,8 @@
         <foodsinorder v-if="openGoods===true" :foods="goods"></foodsinorder>
         <button v-if="role==='customer'"  v-on:click="customerGetFoods">I recieve all Foods</button> 
         <button v-if="role==='restaurant' && order.status==='Sending'" v-on:click="restaurantStartCooking">StartCooking</button> <button v-if="role==='restaurant' && order.status==='Cooking'"  v-on:click="restaurantFinishCooking">FinishCooking</button> 
+        <p v-if="role==='deliveryman'" v-on:click="openCusInfo">-->(customer infomation)</p>
+        <p v-if="openCustomerInfo===true">{{customer.name}}<br/>{{customer.id}}<br/>{{customer.address}}<br/>{{customer.phoneNum}}</p>
         <button v-if="role==='deliveryman'" v-on:click="deliverymanTakeOrder">TakeOrder</button>
         <br/>
         _________________________________________________________       
@@ -22,6 +24,8 @@ export default {
             order:this.orderInfo,
             openDetail:false,
             openGoods:false,
+            openCustomerInfo:false,
+            customer: Object,
             goods:[],
         };
     },
@@ -117,8 +121,24 @@ export default {
             });
             let url = '/orderChangeResult/'+this.role+'/'+this.did+'/'+msg;
             this.$router.push(url);
-        }
+        },
+        openCusInfo:function(){
+            if (this.openCustomerInfo === false){
+                this.openCustomerInfo = true;
+            }
+            else {
+                this.openCustomerInfo = false;
+                return
+            }    
+            let endpoint = '/api/customers/'+this.orderInfo.cId
+            axios.get(endpoint).then((response) => {
+                console.log(response.data);
+                this.customer = response.data;
+            }).catch((error)=>{
+                console.log(error.response.status);
+            });
 
+        }
     },
     components:{
         foodsinorder,

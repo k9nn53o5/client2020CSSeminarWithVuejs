@@ -45,14 +45,14 @@ export default {
             
             let myjson = this.createOrderJson();
             console.log(myjson);
-            let myurl = '/api/customers/'+String(this.cid)+'/orders';
+            let myurl = '/api/customers/'+Number(this.cid)+'/orders';
             axios.post(myurl, myjson).then((response)=>{
                 this.msg = 'success'
             }).catch((error)=>{
                 this.msg = error.response.status;
             });
 
-            // //empty the cart in store and renew component
+            //empty the cart in store and renew component
             this.$store.dispatch('cart/emptyCartData',true);
             this.cartItems = this.Items;  
             this.$emit('RENEWCart',true);
